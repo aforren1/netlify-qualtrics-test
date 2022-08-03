@@ -23,7 +23,9 @@ const game = new Phaser.Game(config);
 
 function create() {
     const url_params = new URL(window.location.href).searchParams
-    console.log(`ID: ${url_params.get('PROLIFIC_PID')}, day: ${url_params.get('DAY')}`)
+    const id = url_params.get('PROLIFIC_PID')
+    const RESPONSE_ID = url_params.get('RESPONSE_ID')
+    console.log(`ID: ${id}, response ID: ${RESPONSE_ID}`)
     text1 = this.add.text(10, 10, '', { fill: '#00ff00' })
     text2 = this.add.text(500, 10, `Cross origin isolation: ${window.crossOriginIsolated}\nClick 3x to send data`, { fill: '#ffff00' })
     this.input.on('pointerdown', (ptr) => {
@@ -39,8 +41,11 @@ function create() {
         counter++
         if (counter == 3) {
             console.log(data)
-            Promise.resolve(sendData(data)).then(() => {
+            const out_dat = {data: data,
+                             responseId: RESPONSE_ID}
+            Promise.resolve(sendData(out_dat)).then((x) => {
                 // close window here? or tell participant to return to qualtrics
+                console.log(x)
             })
             //window.parent.postMessage(JSON.stringify(data), '*')
         }
