@@ -41,7 +41,7 @@ function create() {
         counter++
         if (counter == 3) {
             console.log(data)
-            const out_dat = {data: data,
+            const out_dat = {data: {move: data, id: id},
                              responseId: RESPONSE_ID}
             Promise.resolve(sendData(out_dat)).then((x) => {
                 // close window here? or tell participant to return to qualtrics
