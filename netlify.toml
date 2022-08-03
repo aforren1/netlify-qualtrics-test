@@ -12,7 +12,7 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 [build]
   base = "."
-  publish = "public/"
+  publish = "."
   # command = "npm run prod" # just a reminder for non-trivial tasks
   functions = "netlify_functions/"
 
